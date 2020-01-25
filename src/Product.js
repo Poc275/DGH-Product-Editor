@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 class Product extends Component {
     render() {
         const imageUrl = this.props.imageUrl !== "" ? this.props.imageUrl : "images/image-aqua.png";
+        const categories = this.props.categories !== "" ? this.props.categories : null;
+        const tags = this.props.tags !== "" ? this.props.tags : null;
 
         return (
             <div className="item">
@@ -23,9 +25,11 @@ class Product extends Component {
                         <p>{this.props.description}</p>
                     </div>
                     <div className="extra">
-                        <small>{this.props.categories}</small>
-                        <i className="tags icon"></i>
-                        <small>{this.props.tags}</small>
+                        <small>{categories}</small>
+                        <small>
+                            {tags === null ? null : <i className="tags icon"></i>}
+                            {tags}
+                        </small>
                         <div className="ui right floated button">
                             Edit
                         </div>

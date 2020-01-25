@@ -6,12 +6,16 @@ class ProductList extends Component {
         products: [],
     };
 
-    componentDidMount() {
-        window.d3.csv("wc-product-export-23-1-2020-1579801422838.csv").then(data => {
-            this.setState({
-                products: data
+    componentDidUpdate(prevProps) {
+        // remember to set a condition otherwise an infinite loop will occur
+        // as the component keeps updating and calling this function
+        if(this.props.fileUrl !== prevProps.fileUrl) {
+            window.d3.csv(this.props.fileUrl).then(data => {
+                this.setState({
+                    products: data
+                });
             });
-        });
+        }
     }
 
     render() {
